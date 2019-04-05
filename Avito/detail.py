@@ -11,7 +11,6 @@ from urllib3.exceptions import ProtocolError, MaxRetryError
 
 from Avito.request import get_html
 from . import proxies
-import toml
 
 
 driver = None
@@ -35,11 +34,6 @@ def _make_selenium_driver():
     return webdriver.Chrome(chrome_options=chrome_options)
 
 
-def _recognize_phone_image(image_in_bytes: bytes):
-    img = Image.open(io.BytesIO(image_in_bytes))
-    return image_to_string(img, lang='eng')
-
-
 def get_phone_number(url):
     try:
         driver.get(url)
@@ -49,7 +43,7 @@ def get_phone_number(url):
 
         image_in_bytes = base64.b64decode(b64_image)
 
-        return _recognize_phone_image(image_in_bytes)
+        # return _recognize_phone_image(image_in_bytes)
 
     except (ProtocolError, MaxRetryError):
         print('Error conecting:', url)
@@ -101,7 +95,5 @@ def parse_url(url):
         item_params[param_value_sp[0]] = param_value_sp[1]
 
     data['params'] = item_params
-
-    print(toml.dumps(data))
 
     return data

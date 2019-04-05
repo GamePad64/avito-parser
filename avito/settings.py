@@ -17,8 +17,6 @@ BOT_NAME = 'avito'
 SPIDER_MODULES = ['avito.spiders']
 NEWSPIDER_MODULE = 'avito.spiders'
 
-SPLASH_URL = 'http://127.0.0.1:8050'
-
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'avito (+http://www.yourdomain.com)'
@@ -54,7 +52,6 @@ DOWNLOAD_TIMEOUT = 10
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
-    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
    'avito.middlewares.AvitoSpiderMiddleware': 543,
 }
 
@@ -62,8 +59,6 @@ SPIDER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': None,
-    'scrapy_splash.SplashCookiesMiddleware': 723,
-    'scrapy_splash.SplashMiddleware': 725,
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
     'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
     'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
@@ -97,13 +92,10 @@ ITEM_PIPELINES = {
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-HTTPCACHE_ENABLED = True
+#HTTPCACHE_ENABLED = True
 #HTTPCACHE_EXPIRATION_SECS = 0
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
-HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
-
-DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 
 ROTATING_PROXY_LIST = proxies.get_proxy_list()
 # random.shuffle(ROTATING_PROXY_LIST)

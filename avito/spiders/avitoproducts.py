@@ -13,7 +13,10 @@ from urllib3.exceptions import ProtocolError, MaxRetryError
 from bs4 import BeautifulSoup
 from Avito.request import get_html
 import urllib.parse as urlparse
+import re
 from urllib.parse import urlencode
+from avito.site import phone
+import json
 
 
 BASEURL = 'https://www.avito.ru'
@@ -79,16 +82,36 @@ class AvitoproductsSpider(scrapy.Spider):
     allowed_domains = ['avito.ru']
     start_urls = [
         'https://www.avito.ru/balashiha/kvartiry?p=1',
-        'https://www.avito.ru/balashiha/kvartiry?p=2',
-        'https://www.avito.ru/balashiha/kvartiry?p=3',
-        'https://www.avito.ru/balashiha/kvartiry?p=4',
-        'https://www.avito.ru/balashiha/kvartiry?p=5',
-        'https://www.avito.ru/balashiha/kvartiry?p=6',
-        'https://www.avito.ru/balashiha/kvartiry?p=7',
-        'https://www.avito.ru/balashiha/kvartiry?p=8',
-        'https://www.avito.ru/balashiha/kvartiry?p=9',
-        'https://www.avito.ru/balashiha/kvartiry?p=10',
+        # 'https://www.avito.ru/balashiha/kvartiry?p=2',
+        # 'https://www.avito.ru/balashiha/kvartiry?p=3',
+        # 'https://www.avito.ru/balashiha/kvartiry?p=4',
+        # 'https://www.avito.ru/balashiha/kvartiry?p=5',
+        # 'https://www.avito.ru/balashiha/kvartiry?p=6',
+        # 'https://www.avito.ru/balashiha/kvartiry?p=7',
+        # 'https://www.avito.ru/balashiha/kvartiry?p=8',
+        # 'https://www.avito.ru/balashiha/kvartiry?p=9',
+        # 'https://www.avito.ru/balashiha/kvartiry?p=10',
     ]
+
+    def _extract_id(self, offer):
+        elem = offer.find(class_='title-info-metadata-item')
+        m = re.match("№ (\d+)", elem.text.strip())
+        return int(m.group(1))
+
+    def _extract_phone_hash(self, response):
+        m = re.findall(r"avito\.item\.phone\s\=\s\'(.+)\'", response.text)
+        return m[0]
+
+    def parse_phone(self, response):
+        response_json = json.loads(response.text)
+        image_b64: str = response_json['image64']
+        image_b64 = image_b64.replace('data:image/png;base64,', '', 1)
+
+        phone_str = phone.recognize_phone_image(image_b64)
+        print(phone_str)
+        yield {
+            'phone': phone_str
+        }
 
     def parse_productpage(self, response):
         soup = BeautifulSoup(response.text, 'lxml')
@@ -97,10 +120,13 @@ class AvitoproductsSpider(scrapy.Spider):
 
         name = offer.find(attrs={'itemprop': 'name'})
         images = [('https:' + elem.get('data-url')) for elem in offer.find_all(class_='gallery-img-frame')]
+        product_id = self._extract_id(offer)
         data = {
+            'URL': response.url,
             'Название': name.text,
             'Фото': images,
-            # 'phone': get_phone_number(url)
+            # 'phone': get_phone_number(url),
+            'ID': product_id,
         }
 
         item_params = {}
@@ -109,6 +135,14 @@ class AvitoproductsSpider(scrapy.Spider):
             param_text_normalized = item_param.text.strip()
             param_value_sp = param_text_normalized.split(': ', 1)
             item_params[param_value_sp[0]] = param_value_sp[1]
+
+        pkey = phone.phone_demixer(product_id, self._extract_phone_hash(response))
+
+        yield scrapy.Request(
+            url=phone.make_phone_url(product_id, pkey),
+            headers={'Referer': response.url},
+            callback=self.parse_phone
+        )
 
         data.update(item_params)
 
