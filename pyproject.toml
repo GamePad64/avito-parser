@@ -11,10 +11,11 @@ Pillow = "^6.0"
 pytesseract = "^0.2.6"
 lxml = "^4.3"
 requests = {version = "^2.21",extras = ["socks"]}
-selenium = "^3.141"
 scrapy = "^1.6"
 scrapy-rotating-proxies = "^0.6.1"
 tablib = "^0.13.0"
+dataset = "^1.1"
+phonenumbers = "^8.10"
 
 [tool.poetry.dev-dependencies]
 ipython = "^7.4"

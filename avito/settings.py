@@ -9,7 +9,7 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-from Avito import proxies
+from avito.site import proxies
 import random
 
 BOT_NAME = 'avito'

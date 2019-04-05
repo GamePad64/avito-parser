@@ -1,23 +1,13 @@
 # -*- coding: utf-8 -*-
-import scrapy
-import base64
-import io
-
-from PIL import Image
-from bs4 import BeautifulSoup
-from pytesseract import image_to_string
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.chrome.options import Options
-from urllib3.exceptions import ProtocolError, MaxRetryError
-from bs4 import BeautifulSoup
-from Avito.request import get_html
-import urllib.parse as urlparse
-import re
-from urllib.parse import urlencode
-from avito.site import phone
 import json
+import re
+import urllib.parse as urlparse
+from urllib.parse import urlencode
 
+import scrapy
+from bs4 import BeautifulSoup
+
+from avito.site import phone
 
 BASEURL = 'https://www.avito.ru'
 POPULAR_UA = [
@@ -110,23 +100,34 @@ class AvitoproductsSpider(scrapy.Spider):
         phone_str = phone.recognize_phone_image(image_b64)
         print(phone_str)
         yield {
+            'product_id': response.meta['product_id'],
             'phone': phone_str
         }
 
     def parse_productpage(self, response):
         soup = BeautifulSoup(response.text, 'lxml')
 
-        offer = soup.find(attrs={'itemtype': 'http://schema.org/Product'})
+        product = soup.find(attrs={'itemtype': 'http://schema.org/Product'})
 
-        name = offer.find(attrs={'itemprop': 'name'})
-        images = [('https:' + elem.get('data-url')) for elem in offer.find_all(class_='gallery-img-frame')]
-        product_id = self._extract_id(offer)
+        name = product.find(attrs={'itemprop': 'name'})
+        images = [('https:' + elem.get('data-url')) for elem in product.find_all(class_='gallery-img-frame')]
+        product_id = self._extract_id(product)
+        address = product.find(attrs={'itemprop': 'streetAddress'})
+        description = product.find(class_=re.compile('item-description-.+'), attrs={'itemprop': 'description'})
+
+        offer = soup.find(attrs={'itemtype': 'http://schema.org/Offer'})
+        price = offer.find(attrs={'itemprop': 'price'}).get('content')
+        currency = offer.find(attrs={'itemprop': 'priceCurrency'}).get('content')
+
         data = {
-            'URL': response.url,
-            'Название': name.text,
-            'Фото': images,
-            # 'phone': get_phone_number(url),
-            'ID': product_id,
+            'url': response.url,
+            'name': name.text,
+            'images': ';'.join(images),
+            'product_id': product_id,
+            'address': address.text.strip(),
+            'description': description.text.strip(),
+            'price': price,
+            'currency': currency,
         }
 
         item_params = {}
@@ -141,7 +142,8 @@ class AvitoproductsSpider(scrapy.Spider):
         yield scrapy.Request(
             url=phone.make_phone_url(product_id, pkey),
             headers={'Referer': response.url},
-            callback=self.parse_phone
+            callback=self.parse_phone,
+            meta={'product_id': product_id}
         )
 
         data.update(item_params)

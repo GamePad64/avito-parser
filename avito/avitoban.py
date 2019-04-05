@@ -18,6 +18,7 @@ class AvitoPolicy(BanDetectionPolicy):
         # a ban if there is 'captcha' word in response body.
         ban = super(AvitoPolicy, self).response_is_ban(request, response)
         ban = ban or not self._html_valid(response)
+        ban = ban or response.status == 302
         return ban
 
     def exception_is_ban(self, request, exception):

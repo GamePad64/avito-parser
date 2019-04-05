@@ -1,35 +1,39 @@
-# -*- coding: utf-8 -*-
-
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
+import dataset
 import tablib
-import tempfile
-import json
+
+FIELD_ALIAS = {
+    'id': '№',
+    'product_id': 'ID Авито',
+    'name': 'Название',
+    'url': 'URL',
+    'phone': 'Тел.',
+    'images': 'Фото',
+    'address': 'Адрес',
+    'description': 'Описание',
+    'price': 'Цена',
+    'currency': 'Валюта',
+}
+
 
 class AvitoPipeline(object):
     def open_spider(self, spider):
-        self.tempfile = tempfile.TemporaryFile('w+')
-        self.keys = set()
+        self.db: dataset.database.Database = dataset.connect('sqlite:///:memory:')
+        self.table: dataset.table.Table = self.db['products']
 
     def close_spider(self, spider):
-        ds = tablib.Dataset(headers=self.keys)
+        conv_dict = FIELD_ALIAS.copy()
+        for key in self.table.columns:
+            conv_dict[key] = conv_dict.get(key, key)
 
-        self.tempfile.seek(0)
-        for line in self.tempfile.readlines():
-            row = []
-            line_dict = json.loads(line)
-            for key in self.keys:
-                row.append(line_dict.get(key, ''))
-            ds.append(row)
+        ds = tablib.Dataset(headers=conv_dict.values())
 
-        self.tempfile.close()
+        for row in self.table.find():
+            values = [row[k] or '' for k in conv_dict]
+            ds.append(values)
 
         with open('result.xlsx', 'wb') as f:
             f.write(ds.xlsx)
 
     def process_item(self, item, spider):
-        self.keys.update(dict(item).keys())
-        self.tempfile.write(json.dumps(dict(item)) + "\n")
+        self.table.upsert(dict(item), ['product_id'])
         return item
