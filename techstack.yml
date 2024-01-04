@@ -1,7 +1,8 @@
 repo_name: GamePad64/avito-parser
 report_id: fc18be4926e19fc4f0560f8a46c03790
+version: 0.1
 repo_type: Public
-timestamp: '2023-11-09T15:29:11+00:00'
+timestamp: '2024-01-04T14:58:55+00:00'
 requested_by: GamePad64
 provider: github
 branch: master
@@ -16,6 +17,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/993/pUBY5pVj.png
+  detection_source_url: https://github.com/GamePad64/avito-parser
   detection_source: Repo Metadata
 - name: Docker
   description: Enterprise Container Platform for High-Velocity Innovation.
@@ -26,6 +28,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Virtual Machine Platforms & Containers
   image_url: https://img.stackshare.io/service/586/n4u37v9t_400x400.png
+  detection_source_url: https://github.com/GamePad64/avito-parser
   detection_source: Repo Metadata
 - name: Git
   description: Fast, scalable, distributed revision control system
@@ -35,6 +38,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/GamePad64/avito-parser
   detection_source: Repo Metadata
 - name: PyPI
   description: A repository of software for the Python programming language
@@ -44,6 +48,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Hosted Package Repository
   image_url: https://img.stackshare.io/service/12572/-RIWgodF_400x400.jpg
+  detection_source_url: https://github.com/GamePad64/avito-parser/blob/master/pyproject.toml
   detection_source: pyproject.toml
   last_updated_by: Dima
   last_updated_on: 2018-12-08 16:33:13.000000000 Z
@@ -56,13 +61,13 @@ tools:
   category: Languages & Frameworks
   sub_category: Operating Systems
   image_url: https://img.stackshare.io/service/3511/cof_orange_hex.jpg
-  detection_source_url: Dockerfile
+  detection_source_url: https://github.com/GamePad64/avito-parser/blob/master/Dockerfile
   detection_source: Dockerfile
   last_updated_by: Alexander Shishenko
   last_updated_on: 2019-04-21 11:42:48.000000000 Z
 - name: Pillow
   description: Python Imaging Library
-  package_url: https://pypi.org/Pillow
+  package_url: https://pypi.org/project/Pillow
   version: '6.0'
   license: HPND
   open_source: true
@@ -70,7 +75,7 @@ tools:
   category: Libraries
   sub_category: PyPI Packages
   image_url: https://img.stackshare.io/package/19844/default_accee5d2b8ed75c2245f13504daf75b1cbc8cc9f.png
-  detection_source_url: pyproject.toml
+  detection_source_url: https://github.com/GamePad64/avito-parser/blob/master/pyproject.toml
   detection_source: pyproject.toml
   last_updated_by: Dima
   last_updated_on: 2018-12-08 16:33:13.000000000 Z
@@ -263,7 +268,7 @@ tools:
     first_patched: 9.0.0
 - name: beautifulsoup4
   description: Screen-scraping library
-  package_url: https://pypi.org/beautifulsoup4
+  package_url: https://pypi.org/project/beautifulsoup4
   version: 4.7.1
   license: MIT
   open_source: true
@@ -271,13 +276,13 @@ tools:
   category: Libraries
   sub_category: PyPI Packages
   image_url: https://img.stackshare.io/package/19838/default_85689b353a3a9409328e253ea28d859d29151e0c.png
-  detection_source_url: poetry.lock
+  detection_source_url: https://github.com/GamePad64/avito-parser/blob/master/poetry.lock
   detection_source: pyproject.toml
   last_updated_by: Dima
   last_updated_on: 2018-12-08 16:33:13.000000000 Z
 - name: ipython
   description: 'IPython: Productive Interactive Computing'
-  package_url: https://pypi.org/ipython
+  package_url: https://pypi.org/project/ipython
   version: 7.4.0
   license: BSD-3-Clause
   open_source: true
@@ -285,7 +290,7 @@ tools:
   category: Libraries
   sub_category: PyPI Packages
   image_url: https://img.stackshare.io/package/19892/default_f716e4bc541a9eb6e3f5b7a20d7c35355075b0b4.png
-  detection_source_url: poetry.lock
+  detection_source_url: https://github.com/GamePad64/avito-parser/blob/master/poetry.lock
   detection_source: pyproject.toml
   last_updated_by: Alexander Shishenko
   last_updated_on: 2019-04-05 19:16:25.000000000 Z
@@ -299,7 +304,7 @@ tools:
 - name: lxml
   description: Powerful and Pythonic XML processing library combining libxml2/libxslt
     with the ElementTree API
-  package_url: https://pypi.org/lxml
+  package_url: https://pypi.org/project/lxml
   version: 4.3.3
   license: BSD-3-Clause
   open_source: true
@@ -307,7 +312,7 @@ tools:
   category: Libraries
   sub_category: PyPI Packages
   image_url: https://img.stackshare.io/package/19835/default_85689b353a3a9409328e253ea28d859d29151e0c.png
-  detection_source_url: poetry.lock
+  detection_source_url: https://github.com/GamePad64/avito-parser/blob/master/poetry.lock
   detection_source: pyproject.toml
   last_updated_by: Dima
   last_updated_on: 2018-12-08 16:33:13.000000000 Z
@@ -338,7 +343,7 @@ tools:
     first_patched: 4.6.3
 - name: phonenumbers
   description: Python version of Google's common library for parsing
-  package_url: https://pypi.org/phonenumbers
+  package_url: https://pypi.org/project/phonenumbers
   version: 8.10.9
   license: Apache-2.0
   open_source: true
@@ -346,13 +351,13 @@ tools:
   category: Libraries
   sub_category: PyPI Packages
   image_url: https://img.stackshare.io/package/20180/default_cce94831138206ab61e361b18c1d852a1e5ab6a1.png
-  detection_source_url: poetry.lock
+  detection_source_url: https://github.com/GamePad64/avito-parser/blob/master/poetry.lock
   detection_source: pyproject.toml
   last_updated_by: Alexander Shishenko
   last_updated_on: 2019-04-05 21:39:42.000000000 Z
 - name: pytesseract
   description: Python-tesseract is a python wrapper for Google's Tesseract-OCR
-  package_url: https://pypi.org/pytesseract
+  package_url: https://pypi.org/project/pytesseract
   version: 0.2.6
   license: Apache-2.0
   open_source: true
@@ -360,13 +365,13 @@ tools:
   category: Libraries
   sub_category: PyPI Packages
   image_url: https://img.stackshare.io/package/20381/default_135579e95b2b6e219789a65aaca198fa4c877f7a.png
-  detection_source_url: poetry.lock
+  detection_source_url: https://github.com/GamePad64/avito-parser/blob/master/poetry.lock
   detection_source: pyproject.toml
   last_updated_by: Dima
   last_updated_on: 2018-12-08 16:33:13.000000000 Z
 - name: requests
   description: Python HTTP for Humans
-  package_url: https://pypi.org/requests
+  package_url: https://pypi.org/project/requests
   version: 2.21.0
   license: Apache-2.0
   open_source: true
@@ -374,7 +379,7 @@ tools:
   category: Libraries
   sub_category: PyPI Packages
   image_url: https://img.stackshare.io/package/19826/default_d7c684bf2673f008a9f02ac93901229297a22d7e.png
-  detection_source_url: poetry.lock
+  detection_source_url: https://github.com/GamePad64/avito-parser/blob/master/poetry.lock
   detection_source: pyproject.toml
   last_updated_by: Dima
   last_updated_on: 2018-12-08 16:33:13.000000000 Z
@@ -387,7 +392,7 @@ tools:
     first_patched: 2.31.0
 - name: tablib
   description: Format agnostic tabular data library
-  package_url: https://pypi.org/tablib
+  package_url: https://pypi.org/project/tablib
   version: 0.13.0
   license: MIT
   open_source: true
@@ -395,7 +400,7 @@ tools:
   category: Libraries
   sub_category: PyPI Packages
   image_url: https://img.stackshare.io/package/20340/default_1df94722915923cd0ce380a3aa053d475566575b.png
-  detection_source_url: poetry.lock
+  detection_source_url: https://github.com/GamePad64/avito-parser/blob/master/poetry.lock
   detection_source: pyproject.toml
   last_updated_by: Alexander Shishenko
   last_updated_on: 2019-04-05 15:11:48.000000000 Z
