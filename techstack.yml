@@ -2,7 +2,7 @@ repo_name: GamePad64/avito-parser
 report_id: fc18be4926e19fc4f0560f8a46c03790
 version: 0.1
 repo_type: Public
-timestamp: '2024-01-05T09:21:55+00:00'
+timestamp: '2024-02-29T18:06:57+00:00'
 requested_by: GamePad64
 provider: github
 branch: master
@@ -80,6 +80,12 @@ tools:
   last_updated_by: Dima
   last_updated_on: 2018-12-08 16:33:13.000000000 Z
   vulnerabilities:
+  - name: Out-of-bounds Read
+    cve_id: CVE-2021-25288
+    cve_url: https://github.com/advisories/GHSA-rwv7-3v45-hg29
+    detected_date: Aug 22
+    severity: critical
+    first_patched: 8.2.0
   - name: Out-of-bounds Read in Pillow
     cve_id: CVE-2021-25287
     cve_url: https://github.com/advisories/GHSA-77gc-v2xv-rvvh
@@ -92,24 +98,12 @@ tools:
     detected_date: Jan 18
     severity: critical
     first_patched: 9.0.1
-  - name: Out-of-bounds Read
-    cve_id: CVE-2021-25288
-    cve_url: https://github.com/advisories/GHSA-rwv7-3v45-hg29
-    detected_date: Aug 22
-    severity: critical
-    first_patched: 8.2.0
   - name: Path traversal in Pillow
     cve_id: CVE-2022-24303
     cve_url: https://github.com/advisories/GHSA-9j59-75qj-795w
     detected_date: Mar 12
     severity: critical
     first_patched: 9.0.1
-  - name: Buffer overflow in Pillow
-    cve_id: CVE-2020-10379
-    cve_url: https://github.com/advisories/GHSA-8843-m7mw-mxqm
-    detected_date: Aug 22
-    severity: high
-    first_patched: 7.1.0
   - name: Pillow Out-of-bounds Read
     cve_id: CVE-2020-35653
     cve_url: https://github.com/advisories/GHSA-f5g8-5qq7-938w
@@ -152,6 +146,12 @@ tools:
     detected_date: Aug 22
     severity: high
     first_patched: 8.2.0
+  - name: Buffer overflow in Pillow
+    cve_id: CVE-2020-10379
+    cve_url: https://github.com/advisories/GHSA-8843-m7mw-mxqm
+    detected_date: Aug 22
+    severity: high
+    first_patched: 7.1.0
   - name: Out-of-bounds read in Pillow
     cve_id: CVE-2020-11538
     cve_url: https://github.com/advisories/GHSA-43fq-w8qq-v88h
@@ -206,60 +206,66 @@ tools:
     detected_date: Aug 22
     severity: high
     first_patched: 8.1.1
+  - name: Arbitrary Code Execution in Pillow
+    cve_id: CVE-2023-50447
+    cve_url: https://github.com/advisories/GHSA-3f63-hfp8-52jq
+    detected_date: Jan 23
+    severity: high
+    first_patched: 10.2.0
   - name: Pillow Denial of service
     cve_id: CVE-2021-28675
     cve_url: https://github.com/advisories/GHSA-g6rj-rv7j-xwp4
     detected_date: Aug 22
     severity: moderate
     first_patched: 8.2.0
-  - name: Improper Initialization in Pillow
-    cve_id: CVE-2022-22815
-    cve_url: https://github.com/advisories/GHSA-pw3c-h7wp-cvhx
-    detected_date: Jan 18
-    severity: moderate
-    first_patched: 9.0.0
   - name: Insufficient Verification of Data Authenticity in Pillow
     cve_id: CVE-2021-28678
     cve_url: https://github.com/advisories/GHSA-hjfx-8p6c-g7gx
     detected_date: Aug 22
     severity: moderate
     first_patched: 8.2.0
-  - name: Out-of-bounds read in Pillow
-    cve_id: CVE-2020-10378
-    cve_url: https://github.com/advisories/GHSA-3xv8-3j54-hgrp
-    detected_date: Jan 18
-    severity: moderate
-    first_patched: 7.1.0
   - name: Pillow Out-of-bounds Read
     cve_id: CVE-2020-35655
     cve_url: https://github.com/advisories/GHSA-hf64-x4gq-p99h
     detected_date: Aug 22
     severity: moderate
     first_patched: 8.1.0
-  - name: Out-of-bounds Read in Pillow
-    cve_id: CVE-2022-22816
-    cve_url: https://github.com/advisories/GHSA-xrcv-f9gm-v42c
-    detected_date: Jan 18
-    severity: moderate
-    first_patched: 9.0.0
   - name: Out-of-bounds reads in Pillow
     cve_id: CVE-2020-10177
     cve_url: https://github.com/advisories/GHSA-cqhg-xjhh-p8hf
     detected_date: Aug 22
     severity: moderate
     first_patched: 7.1.0
+  - name: Improper Initialization in Pillow
+    cve_id: CVE-2022-22815
+    cve_url: https://github.com/advisories/GHSA-pw3c-h7wp-cvhx
+    detected_date: Jan 18
+    severity: moderate
+    first_patched: 9.0.0
   - name: Regular Expression Denial of Service (ReDoS) in Pillow
     cve_id: CVE-2021-25292
     cve_url: https://github.com/advisories/GHSA-9hx2-hgq2-2g4f
     detected_date: Aug 22
     severity: moderate
     first_patched: 8.1.1
+  - name: Out-of-bounds read in Pillow
+    cve_id: CVE-2020-10378
+    cve_url: https://github.com/advisories/GHSA-3xv8-3j54-hgrp
+    detected_date: Jan 18
+    severity: moderate
+    first_patched: 7.1.0
   - name: Out-of-bounds reads in Pillow
     cve_id: CVE-2020-10994
     cve_url: https://github.com/advisories/GHSA-vj42-xq3r-hr3r
     detected_date: Aug 22
     severity: moderate
     first_patched: 7.1.0
+  - name: Out-of-bounds Read in Pillow
+    cve_id: CVE-2022-22816
+    cve_url: https://github.com/advisories/GHSA-xrcv-f9gm-v42c
+    detected_date: Jan 18
+    severity: moderate
+    first_patched: 9.0.0
   - name: Infinite loop in Pillow
     cve_id: 
     cve_url: https://github.com/advisories/GHSA-4fx9-vc88-q2xc
